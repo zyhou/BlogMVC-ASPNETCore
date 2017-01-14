@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using BlogMVC.Data;
 
 namespace BlogMVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly BlogContext _context;
+
+        public HomeController(BlogContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             return View();
