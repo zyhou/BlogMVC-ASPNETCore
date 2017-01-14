@@ -9,8 +9,8 @@
         </small>
     </p>
     <p>
-        @Model.Content
-        @*@Html.Markdown((Model.Content.Length <= 450) ? Model.Content : Model.Content.Substring(0, 450) + "...")*@
+        @{ string content = Model.Content.Substring(0, Math.Min(180, Model.Content.Length)) + "...";}
+        <markdown content="@content" />
     </p>
     <p class="text-right"><a href="@Model.Slug" class="btn btn-primary">Read more...</a></p>
 </article>
