@@ -1,0 +1,11 @@
+﻿@model IEnumerable<BlogMVC.Models.Post>
+
+<h4>Categories</h4>
+<div class="list-group">
+    @foreach (var post in Model)
+    {
+        <a href="@post.Slug" class="list-group-item">
+            @post.Name
+        </a>
+    }
+</div>

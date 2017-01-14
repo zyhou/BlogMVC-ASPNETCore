@@ -1,0 +1,18 @@
+﻿@model BlogMVC.Models.Post
+
+<article>
+    <h2><a href="@Model.Slug">@Model.Name</a></h2>
+    <p>
+        <small>
+            Category : <a asp-area="" asp-controller="Category" asp-action="Index" asp-route-id="@Model.Category.Slug">@Model.Category.Name</a>,
+            by <a asp-area="" asp-controller="Author" asp-action="Index" asp-route-id="@Model.IdUser">@Model.User.Username</a> on <em>@Model.Created.ToString()</em>
+        </small>
+    </p>
+    <p>
+        @Model.Content
+        @*@Html.Markdown((Model.Content.Length <= 450) ? Model.Content : Model.Content.Substring(0, 450) + "...")*@
+    </p>
+    <p class="text-right"><a href="@Model.Slug" class="btn btn-primary">Read more...</a></p>
+</article>
+
+<hr>

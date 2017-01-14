@@ -58,7 +58,7 @@ namespace BlogMVC
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Posts}/{action=Index}/{id?}");
             });
 
             contexte.Database.EnsureCreated();

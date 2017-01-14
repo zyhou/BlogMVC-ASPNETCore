@@ -1,0 +1,12 @@
+﻿@model IEnumerable<BlogMVC.Models.Category>
+
+<h4>Categories</h4>
+<div class="list-group">
+    @foreach (var category in Model)
+    {
+        <a asp-area="" asp-controller="Category" asp-action="Index" asp-route-id="@category.Slug" class="list-group-item">
+            <span class="badge">@category.PostCount</span>
+            @category.Name
+        </a>
+    }
+</div>
