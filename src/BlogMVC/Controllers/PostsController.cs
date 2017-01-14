@@ -6,13 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using BlogMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using BlogMVC.Models;
+using BlogMVC.Models.Paging;
 
 namespace BlogMVC.Controllers
 {
-    public class PostsController : Controller
+    public class PostsController : BaseController
     {
-        const int ITEM_PER_PAGE = 5;
-
         private readonly BlogContext _context;
 
         public PostsController(BlogContext context)
@@ -31,21 +30,8 @@ namespace BlogMVC.Controllers
                                        .Skip(startIndex)
                                        .Take(ITEM_PER_PAGE)
                                        .ToListAsync();
-            return View(posts);
-        }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            return View(new PagedResult<Post>() { CurrentPage = page, PageCount = await _context.Posts.CountAsync(), Results = posts });
         }
 
         public IActionResult Error()

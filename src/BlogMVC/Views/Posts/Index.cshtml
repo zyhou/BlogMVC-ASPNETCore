@@ -1,4 +1,6 @@
-﻿@model IEnumerable<BlogMVC.Models.Post>
+﻿@using BlogMVC.ViewComponents
+@using BlogMVC.Models.Paging
+@model PagedResult<BlogMVC.Models.Post>
 @{
     ViewData["Title"] = "Mon blog";
 }
@@ -8,7 +10,9 @@
     <p class="lead">Welcome on my blog</p>
 </div>
 
-@foreach (var item in Model)
+@foreach (var item in Model.Results)
 {
     @Html.DisplayFor(modelItem => item, "PostPreview")
 }
+
+@(await Component.InvokeAsync<PagerViewComponent>(Model))

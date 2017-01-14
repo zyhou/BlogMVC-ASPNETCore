@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogMVC.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private readonly BlogContext _context;
 
@@ -19,7 +19,6 @@ namespace BlogMVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-
             var a = await _context.Users.Include(u => u.Posts).ToListAsync();
             return View(a);
         }

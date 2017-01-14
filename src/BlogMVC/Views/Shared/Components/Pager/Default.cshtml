@@ -1,0 +1,31 @@
+﻿@model BlogMVC.Models.Paging.PagedResultBase
+@{
+
+    var urlTemplate = Url.Action() + "?page={0}";
+    var request = ViewContext.HttpContext.Request;
+    foreach (var key in request.Query.Keys)
+    {
+        if (key == "page")
+        {
+            continue;
+        }
+
+        urlTemplate += "&" + key + "=" + request.Query[key];
+    }
+
+    int previous = Model.CurrentPage > 1 ? (Model.CurrentPage - 1) : 1;
+    int next = Model.CurrentPage < Model.PageSize ? Model.CurrentPage + 1 : Model.PageSize;
+}
+
+<ul class="pagination">
+    @if (Model.PageSize > 1)
+    {
+        <li><a href="@urlTemplate.Replace("{0}", previous.ToString())">&laquo;</a></li>
+        @for (var i = 1; i <= Model.PageSize; i++)
+        {
+            string css = (i == Model.CurrentPage) ? "active" : "";
+            <li class="@css"><a href="@urlTemplate.Replace("{0}", i.ToString())">@i</a></li>
+        }
+        <li><a href="@urlTemplate.Replace("{0}", next.ToString())">&raquo;</a></li>
+    }
+</ul>
