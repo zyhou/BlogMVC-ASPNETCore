@@ -4,7 +4,7 @@
 <div class="list-group">
     @foreach (var category in Model)
     {
-        <a asp-area="" asp-controller="Category" asp-action="Index" asp-route-id="@category.Slug" class="list-group-item">
+        <a asp-area="" asp-controller="Category" asp-action="@category.Slug" class="list-group-item">
             <span class="badge">@category.PostCount</span>
             @category.Name
         </a>

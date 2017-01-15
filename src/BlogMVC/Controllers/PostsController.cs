@@ -24,14 +24,47 @@ namespace BlogMVC.Controllers
             int startIndex = page <= 1 ? 0 : (page - 1) * ITEM_PER_PAGE;
 
             List<Post> posts = await _context.Posts
-                                       .Include(p => p.Category)
-                                       .Include(p => p.User)
-                                       .OrderByDescending(p => p.Created)
-                                       .Skip(startIndex)
-                                       .Take(ITEM_PER_PAGE)
-                                       .ToListAsync();
+                                             .Include(p => p.Category)
+                                             .Include(p => p.User)
+                                             .OrderByDescending(p => p.Created)
+                                             .Skip(startIndex)
+                                             .Take(ITEM_PER_PAGE)
+                                             .ToListAsync();
 
             return View(new PagedResult<Post>() { CurrentPage = page, PageCount = await _context.Posts.CountAsync(), Results = posts });
+        }
+
+        [HttpGet("/{slug}")]
+        public async Task<IActionResult> Details(string slug)
+        {
+            Post post = await _context.Posts
+                                     .Include(p => p.Comments)
+                                     .Include(p => p.Category)
+                                     .Include(p => p.User)
+                                     .FirstOrDefaultAsync(p => p.Slug == slug);
+
+            return View(post);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Comment(Comment newComment)
+        {
+            Post post = await _context.Posts
+                                     .Include(p => p.Comments)
+                                     .Include(p => p.Category)
+                                     .Include(p => p.User)
+                                     .SingleOrDefaultAsync(p => p.Id == newComment.IdPost);
+
+            if (!ModelState.IsValid)
+            {
+                return View("Details", post);
+            }
+
+            newComment.Created = DateTime.Now;
+            await _context.Comments.AddAsync(newComment);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { slug = post.Slug });
         }
 
         public IActionResult Error()

@@ -14,7 +14,7 @@ namespace BlogMVC.Models.Paging
         {
             get
             {
-                return PageCount / BaseController.ITEM_PER_PAGE;
+                return (int)Math.Ceiling((PageCount / (decimal)BaseController.ITEM_PER_PAGE));
             }
         }
     }

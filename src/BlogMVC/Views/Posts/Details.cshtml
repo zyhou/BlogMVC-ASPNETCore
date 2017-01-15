@@ -1,0 +1,54 @@
+﻿@using BlogMVC.Models;
+@model Post
+@{
+    ViewData["Title"] = "Post";
+}
+
+@Html.DisplayFor(modelItem => @Model, "Post")
+
+<section class="comments">
+
+    <h3>Comment this post</h3>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger"><strong>Oh snap !</strong> you did some errors</div>
+    }
+
+    <form asp-controller="Posts" asp-action="Comment" method="post" role="form">
+
+        @{var newComment = new Comment();}
+
+        <input asp-for="@newComment.IdPost" value="@Model.Id" />
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" form-validation-for="@newComment.Mail" form-validationerror-class="has-error">
+                    <input asp-for="@newComment.Mail" class="form-control" placeholder="Your email" style="min-width: 100%" />
+                    <span asp-validation-for="@newComment.Mail" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group" form-validation-for="@newComment.Username" form-validationerror-class="has-error">
+                    <input asp-for="@newComment.Username" class="form-control" placeholder="Your username" style="min-width: 100%" />
+                    <span asp-validation-for="@newComment.Username" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" form-validation-for="@newComment.Content" form-validationerror-class="has-error">
+            <textarea asp-for="@newComment.Content" class="form-control" placeholder="Your comment" rows="3" style="min-width: 100%"></textarea>
+            <span asp-validation-for="@newComment.Content" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+    <h3>@Model.Comments.Count Commentaires</h3>
+    @foreach (var comment in Model.Comments)
+    {
+        @Html.DisplayFor(modelItem => comment)
+    }
+
+</section>
