@@ -12,22 +12,22 @@ using Microsoft.AspNetCore.Authorization;
 namespace BlogMVC.Controllers
 {
     [AllowAnonymous]
-    public class CategoryController : BaseController
+    public class AuthorController : BaseController
     {
         private readonly BlogContext _context;
 
-        public CategoryController(BlogContext context)
+        public AuthorController(BlogContext context)
         {
             _context = context;
         }
 
-        [HttpGet("/Category/{slug}")]
-        public async Task<IActionResult> Index(string slug, int page = 1)
+        [HttpGet("/Author/{id}")]
+        public async Task<IActionResult> Index(int id, int page = 1)
         {
             int startIndex = page <= 1 ? 0 : (page - 1) * ITEM_PER_PAGE;
 
             List<Post> posts = await _context.Posts
-                                             .Where(p => p.Category.Slug == slug)
+                                             .Where(p => p.User.Id == id)
                                              .Include(p => p.Category)
                                              .Include(p => p.User)
                                              .OrderByDescending(p => p.Created)
@@ -35,7 +35,7 @@ namespace BlogMVC.Controllers
                                              .Take(ITEM_PER_PAGE)
                                              .ToListAsync();
 
-            return View(new PagedResult<Post>() { CurrentPage = page, PageCount = await _context.Posts.Where(p => p.Category.Slug == slug).CountAsync(), Results = posts });
+            return View(new PagedResult<Post>() { CurrentPage = page, PageCount = await _context.Posts.Where(p => p.User.Id == id).CountAsync(), Results = posts });
         }
 
         public IActionResult Error()

@@ -24,7 +24,7 @@ namespace BlogMVC.Data
             {
                 entity.HasKey(e => e.Id);
 
-                entity.Property(e => e.Username).IsRequired().HasMaxLength(255);
+                entity.Property(e => e.UserName).IsRequired().HasMaxLength(255);
                 entity.Property(e => e.Password).IsRequired().HasMaxLength(255);
             });
 
@@ -55,7 +55,7 @@ namespace BlogMVC.Data
             {
                 entity.HasKey(e => e.Id);
 
-                entity.Property(e => e.Username).IsRequired().HasMaxLength(255);
+                entity.Property(e => e.UserName).IsRequired().HasMaxLength(255);
                 entity.Property(e => e.Mail).IsRequired().HasMaxLength(255);
                 entity.Property(e => e.Content).IsRequired();
                 entity.Property(e => e.Created).ValueGeneratedOnAdd();

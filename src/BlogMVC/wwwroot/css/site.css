@@ -28,15 +28,26 @@ textarea {
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"]
-{
+.carousel-inner .item img[src$=".svg"] {
     width: 100%;
 }
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
-  /* Hide captions */
-  .carousel-caption {
-    display: none
-  }
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }

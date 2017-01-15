@@ -1,7 +1,7 @@
 ﻿@model BlogMVC.Models.Paging.PagedResultBase
 @{
 
-    var urlTemplate = Url.Action() + "?page={0}";
+    var urlTemplate = Context.Request.Path + "?page={0}";
     var request = ViewContext.HttpContext.Request;
     foreach (var key in request.Query.Keys)
     {

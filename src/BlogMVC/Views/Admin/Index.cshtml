@@ -1,0 +1,22 @@
+﻿@model BlogMVC.Models.User
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<form asp-controller="Admin" asp-action="Login" method="post" role="form" class="form-signin">
+
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <h4 class="form-signin-heading">Please sign in</h4>
+
+    <input asp-for="UserName" class="form-control" placeholder="User name" />
+    <span asp-validation-for="UserName" class="text-danger"></span>
+
+    <input asp-for="Password" class="form-control" placeholder="Password" />
+    <span asp-validation-for="Password" class="text-danger"></span>
+
+    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign In" />
+</form>
+

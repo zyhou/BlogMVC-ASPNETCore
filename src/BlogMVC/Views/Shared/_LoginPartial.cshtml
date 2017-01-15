@@ -1,27 +1,12 @@
-﻿@*@using Microsoft.AspNetCore.Identity
-    @using WebApplication1.Models
+﻿<ul class="nav navbar-nav navbar-right">
 
-    @inject SignInManager<ApplicationUser> SignInManager
-    @inject UserManager<ApplicationUser> UserManager*@
-
-@*@if (SignInManager.IsSignedIn(User))
+    @if (User.Identity.IsAuthenticated)
     {
-        <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello toi!</a>
-                </li>
-                <li>
-                    <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>
-                </li>
-            </ul>
-        </form>
+        <li><a href="/Admin/Posts/">Bonjour @User.Identity.Name</a></li>
+        <li><a asp-area="" asp-controller="Admin" asp-action="Logout">Logout</a></li>
     }
     else
-    {*@
-<ul class="nav navbar-nav navbar-right">
-    <li><a asp-area="" asp-controller="Account" asp-action="Register">Admin</a></li>
-</ul>
-@*
+    {
+        <li><a asp-area="" asp-controller="Admin">Admin</a></li>
     }
-*@
+</ul>

@@ -4,8 +4,8 @@
     <h1>@Model.Name</h1>
     <p>
         <small>
-            Category : <a asp-area="" asp-controller="Category" asp-action="Index" asp-route-id="@Model.Category.Slug">@Model.Category.Name</a>,
-            by <a asp-area="" asp-controller="Author" asp-action="Index" asp-route-id="@Model.IdUser">@Model.User.Username</a> on <em>@Model.Created.ToString()</em>
+            Category : <a asp-area="" asp-controller="Category" asp-action="@Model.Category.Slug">@Model.Category.Name</a>,
+            by <a asp-area="" asp-controller="Author" asp-action="@Model.IdUser">@Model.User.UserName</a> on <em>@Model.Created.ToString()</em>
         </small>
     </p>
 </div>

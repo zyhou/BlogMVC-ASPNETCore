@@ -19,7 +19,7 @@ namespace BlogMVC.Models
         [Required]
         [StringLength(255)]
         [Display(Name = "username")]
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(255)]

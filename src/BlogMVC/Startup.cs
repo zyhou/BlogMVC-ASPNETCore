@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using BlogMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace BlogMVC
 {
@@ -31,7 +32,7 @@ namespace BlogMVC
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<BlogContext>(options => 
+            services.AddDbContext<BlogContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc(options =>
@@ -58,8 +59,23 @@ namespace BlogMVC
 
             app.UseStaticFiles();
 
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationScheme = "MyCookieMiddlewareInstance",
+                LoginPath = new PathString("/Admin/Login"),
+                LogoutPath = new PathString("/Admin/Logout"),
+                AccessDeniedPath = new PathString("/Admin/AccessDenied"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                CookieSecure = env.IsDevelopment() ? CookieSecurePolicy.SameAsRequest : CookieSecurePolicy.Always
+            });
+
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "areaRoute",
+                    template: "{area:exists}/{controller=Posts}/{action=Index}/{id?}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Posts}/{action=Index}/{id?}");

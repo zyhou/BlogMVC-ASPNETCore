@@ -1,0 +1,63 @@
+﻿@using BlogMVC.ViewComponents
+@using BlogMVC.Models.Paging
+@using BlogMVC.Models
+@model PagedResult<Post>
+@{
+    ViewBag.Title = "Blog | Admin panel";
+}
+
+<h1>Manage posts</h1>
+
+<p>
+    <a asp-area="Admin" asp-controller="Posts" asp-action="Create" class="btn btn-primary">Create</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Publication date
+            </th>
+
+            <th>
+                Category
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (Post post in Model.Results)
+        {
+            <tr>
+                <td>
+                    @post.Id
+                </td>
+                <td>
+                    @post.Name
+                </td>
+                <td>
+                    @post.Created
+                </td>
+                <td>
+                    @post.Category.Name
+                </td>
+                <td>
+                    <a asp-area="Admin" asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id" class="btn btn-primary">Edit</a>
+                    <a asp-area="Admin" asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id" class="btn btn-danger" onClick="return confirm('Are you sure ?')">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@(await Component.InvokeAsync<PagerViewComponent>(Model))
