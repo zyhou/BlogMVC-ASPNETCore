@@ -5,7 +5,7 @@
     <p>
         <small>
             Category : <a asp-area="" asp-controller="Category" asp-action="@Model.Category.Slug">@Model.Category.Name</a>,
-            by <a asp-area="" asp-controller="Author" asp-action="@Model.IdUser">@Model.User.UserName</a> on <em>@Model.Created.ToString()</em>
+            by <a asp-area="" asp-controller="Author" asp-action="@Model.IdUser">@Model.User.UserName</a> on <em>@Model.Created.ToString("MMM dd yyyy")</em>
         </small>
     </p>
 </div>
