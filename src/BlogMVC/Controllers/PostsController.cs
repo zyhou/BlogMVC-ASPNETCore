@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BlogMVC.Controllers
 {
+    [AllowAnonymous]
     public class PostsController : BaseController
     {
         private readonly BlogContext _context;
@@ -20,7 +21,6 @@ namespace BlogMVC.Controllers
             _context = context;
         }
 
-        [AllowAnonymous]
         public async Task<IActionResult> Index(int page = 1)
         {
             int startIndex = page <= 1 ? 0 : (page - 1) * ITEM_PER_PAGE;
@@ -36,7 +36,6 @@ namespace BlogMVC.Controllers
             return View(new PagedResult<Post>() { CurrentPage = page, PageCount = await _context.Posts.CountAsync(), Results = posts });
         }
 
-        [AllowAnonymous]
         [HttpGet("/{slug}")]
         public async Task<IActionResult> Details(string slug)
         {
@@ -49,7 +48,6 @@ namespace BlogMVC.Controllers
             return View(post);
         }
 
-        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Comment(Comment newComment)
         {

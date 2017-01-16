@@ -26,7 +26,7 @@ namespace BlogMVC.ViewComponents
 
         private Task<List<Post>> GetItemsAsync(int take)
         {
-            return _context.Posts.Take(take).OrderByDescending(p => p.Created).ToListAsync();
+            return _context.Posts.OrderByDescending(p => p.Created).Take(take).ToListAsync();
         }
     }
 }

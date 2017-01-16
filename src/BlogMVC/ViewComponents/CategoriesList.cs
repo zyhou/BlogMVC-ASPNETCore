@@ -26,7 +26,7 @@ namespace BlogMVC.ViewComponents
 
         private Task<List<Category>> GetItemsAsync(int take)
         {
-            return _context.Categories.Take(take).OrderBy(c => c.Name).ToListAsync();
+            return _context.Categories.OrderBy(c => c.Name).Take(take).ToListAsync();
         }
     }
 }
