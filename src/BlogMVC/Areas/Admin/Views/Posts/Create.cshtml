@@ -2,15 +2,20 @@
 @model PostViewModel
 @{
     ViewBag.Title = "Blog | Admin panel";
+
+    string action = Model.Id == 0 ? "Create" : "Edit";
 }
 
-<h1>Create post</h1>
+<h1>@action post</h1>
 
 <p><a href="/Admin/Posts">Back to posts</a></p>
 
-<form asp-area="Admin" asp-controller="Posts" asp-action="Create" method="post" role="form">
+<form asp-area="Admin" asp-controller="Posts" asp-action="@action" method="post" role="form">
 
     <div asp-validation-summary="ModelOnly"></div>
+
+    <input asp-for="Id" />
+    <input asp-for="Created" />
 
     <div class="row">
         <div class="col-md-6">
@@ -57,7 +62,7 @@
     </div>
 
     <div class="submit">
-        <input type="submit" value="Create" class="btn btn-primary" />
+        <input type="submit" value="@action" class="btn btn-primary" />
     </div>
 
 </form>

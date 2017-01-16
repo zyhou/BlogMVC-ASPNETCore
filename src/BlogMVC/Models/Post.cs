@@ -10,6 +10,7 @@ namespace BlogMVC.Models
 {
     public class Post
     {
+        [HiddenInput]
         public int Id { get; set; }
 
         [Required]
@@ -34,6 +35,7 @@ namespace BlogMVC.Models
         [Display(Name = "Content :")]
         public string Content { get; set; }
 
+        [HiddenInput]
         public DateTime Created { get; set; }
 
         public List<Comment> Comments { get; set; }

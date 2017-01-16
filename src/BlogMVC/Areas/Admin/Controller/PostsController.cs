@@ -43,8 +43,7 @@ namespace BlogMVC.Area.Posts.Controller
         public async Task<IActionResult> Create()
         {
             var postVm = new PostViewModel();
-            postVm.CategoriesSelected = await _context.Categories.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }).ToListAsync();
-            postVm.UsersSelected = await _context.Users.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.UserName }).ToListAsync();
+            await postVm.InitListSeleted(_context);
             return View(postVm);
         }
 
@@ -61,10 +60,36 @@ namespace BlogMVC.Area.Posts.Controller
                 return RedirectToAction("Index", "Posts", new { area = "Admin" });
             }
 
-            postVm.CategoriesSelected = await _context.Categories.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }).ToListAsync();
-            postVm.UsersSelected = await _context.Users.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.UserName }).ToListAsync();
+            await postVm.InitListSeleted(_context);
 
             return View(postVm);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            Post post = await _context.Posts.SingleOrDefaultAsync(p => p.Id == id);
+
+            var postVm = new PostViewModel(post);
+            await postVm.InitListSeleted(_context);
+
+            return View("Create", postVm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(PostViewModel postVm)
+        {
+            if (ModelState.IsValid)
+            {
+                Post post = new Post(postVm);
+                _context.Entry(post).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Posts", new { area = "Admin" });
+            }
+
+            await postVm.InitListSeleted(_context);
+
+            return View("Create", postVm);
         }
 
         public async Task<IActionResult> Delete(int id)
