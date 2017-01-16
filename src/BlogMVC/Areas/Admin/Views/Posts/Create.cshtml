@@ -1,0 +1,63 @@
+﻿@using BlogMVC.ViewModel;
+@model PostViewModel
+@{
+    ViewBag.Title = "Blog | Admin panel";
+}
+
+<h1>Create post</h1>
+
+<p><a href="/Admin/Posts">Back to posts</a></p>
+
+<form asp-area="Admin" asp-controller="Posts" asp-action="Create" method="post" role="form">
+
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group required">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" style="min-width: 100%" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Slug"></label>
+                <input asp-for="Slug" class="form-control" style="min-width: 100%" />
+                <span asp-validation-for="Slug" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="IdCategorie"></label>
+                <select asp-for="IdCategorie" asp-items="Model.CategoriesSelected" class="form-control" style="min-width: 100%">
+                    <option value="">--none--</option>
+                </select>
+                <span asp-validation-for="IdCategorie" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="IdUser"></label>
+                <select asp-for="IdUser" asp-items="Model.UsersSelected" class="form-control" style="min-width: 100%">
+                    <option value="">--none--</option>
+                </select>
+                <span asp-validation-for="IdUser" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group required">
+        <label asp-for="Content" class="control-label col-md-2"></label>
+        <textarea asp-for="Content" class="form-control" style="min-width: 100%"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+
+    <div class="submit">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+
+</form>
