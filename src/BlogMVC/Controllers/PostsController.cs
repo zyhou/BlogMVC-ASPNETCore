@@ -45,6 +45,8 @@ namespace BlogMVC.Controllers
                                      .Include(p => p.User)
                                      .FirstOrDefaultAsync(p => p.Slug == slug);
 
+            if (post == null) return View("Error");
+
             return View(post);
         }
 
@@ -56,6 +58,8 @@ namespace BlogMVC.Controllers
                                      .Include(p => p.Category)
                                      .Include(p => p.User)
                                      .SingleOrDefaultAsync(p => p.Id == newComment.IdPost);
+
+            if (post == null) return View("Error");
 
             if (!ModelState.IsValid)
             {

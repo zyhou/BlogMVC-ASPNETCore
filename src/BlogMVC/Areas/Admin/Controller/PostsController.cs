@@ -70,6 +70,7 @@ namespace BlogMVC.Area.Posts.Controller
         public async Task<IActionResult> Edit(int id)
         {
             Post post = await _context.Posts.SingleOrDefaultAsync(p => p.Id == id);
+            if (post == null) return View("Error");
 
             var postVm = new PostViewModel(post);
             await postVm.InitListSeleted(_context);
@@ -80,9 +81,12 @@ namespace BlogMVC.Area.Posts.Controller
         [HttpPost]
         public async Task<IActionResult> Edit(PostViewModel postVm)
         {
+            if (!await _context.Posts.AnyAsync(p => p.Id == postVm.Id)) return View("Error");
+
             if (ModelState.IsValid)
             {
                 Post post = new Post(postVm);
+
                 _context.Entry(post).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
 
@@ -97,6 +101,7 @@ namespace BlogMVC.Area.Posts.Controller
         public async Task<IActionResult> Delete(int id)
         {
             Post post = await _context.Posts.Include(p => p.Comments).SingleOrDefaultAsync(p => p.Id == id);
+            if (post == null) return View("Error");
 
             _context.Posts.Remove(post);
             await _context.SaveChangesAsync();
