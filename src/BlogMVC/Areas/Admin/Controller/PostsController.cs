@@ -25,6 +25,8 @@ namespace BlogMVC.Area.Posts.Controller
             _context = context;
         }
 
+        [HttpGet("/Admin/Posts")]
+        [HttpGet("/Admin/Posts/Index")]
         public async Task<IActionResult> Index(int page = 1)
         {
             int startIndex = page <= 1 ? 0 : (page - 1) * ITEM_PER_PAGE;
