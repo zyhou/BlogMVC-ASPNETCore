@@ -6,7 +6,7 @@ My contribution to [BlogMVC.com](http://www.blogmvc.com/) using ASP.NET Core.
 
 - [.NET Core 1.1](https://www.microsoft.com/net/download/core#/current)
 - Mysql
-- Create structure database, [dump.sql](https://raw.githubusercontent.com/Grafikart/blogmvc/master/dump.sql)
+- Create structure database, [dump.sql](https://github.com/zyhou/BlogMVC-ASPNETCore/blob/master/dump.sql)
 - Open the solution file BlogMVC.sln
 - Edit connection string in [appsettings.json](https://github.com/zyhou/BlogMVC-ASPNETCore/blob/master/src/BlogMVC/appsettings.json)
 - Start the web site
@@ -15,7 +15,6 @@ My contribution to [BlogMVC.com](http://www.blogmvc.com/) using ASP.NET Core.
 
 - [ ] check param controller (id exists etc...)
 - [ ] create view error (404)
-- [ ] watch why return RedirectToAction("Index", "Posts", new { area = "Admin" }); doesn't work 
 - [ ] add flash message when the post is added
 - [ ] delete if possible "runtimes" section in [project.json](https://github.com/zyhou/BlogMVC-ASPNETCore/blob/master/src/BlogMVC/project.json)
 
