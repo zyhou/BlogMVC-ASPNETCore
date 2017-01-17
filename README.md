@@ -13,8 +13,7 @@ My contribution to [BlogMVC.com](http://www.blogmvc.com/) using ASP.NET Core.
 
 ## Todo
 
-- [ ] check param controller (id exists etc...)
-- [ ] create view error (404)
+- [ ] add cache
 - [ ] add flash message when the post is added
 - [ ] delete if possible "runtimes" section in [project.json](https://github.com/zyhou/BlogMVC-ASPNETCore/blob/master/src/BlogMVC/project.json)
 
