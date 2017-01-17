@@ -1,6 +1,6 @@
 # BlogMVC : ASP.NET Core
 
-My contribution to [BlogMVC.com](http://www.blogmvc.com/) using Symfony 3.
+My contribution to [BlogMVC.com](http://www.blogmvc.com/) using ASP.NET Core.
 
 ## Install
 
